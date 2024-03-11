@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas 4 - JavaScript</title>
+    <style>
+        /* Style for labels and input fields */
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Input Data</h1>
+    <label for="namaInput">Nama:</label>
+    <input type="text" id="namaInput" placeholder="Masukkan Nama">
+
+    <label for="jumlahInput">Jumlah Pilihan:</label>
+    <input type="number" id="jumlahInput" placeholder="Masukkan Jumlah Pilihan">
+
+    <button onclick="tampilkanPilihan()">OK</button>
+
+    <div id="pilihanContainer"></div>
+
+    <script>
+        function tampilkanPilihan() {
+            const nama = document.getElementById("namaInput").value;
+            const jumlahPilihan = parseInt(document.getElementById("jumlahInput").value);
+
+            // Validasi input (misalnya pastikan jumlahPilihan positif)
+
+            // Tampilkan pilihan setelah tombol OK ditekan
+            const pilihanContainer = document.getElementById("pilihanContainer");
+            pilihanContainer.innerHTML = ""; // Clear existing content
+
+            for (let i = 1; i <= jumlahPilihan; i++) {
+                const label = document.createElement("label");
+                label.textContent = `Pilihan ${i}: `;
+                const input = document.createElement("input");
+                input.type = "text";
+                input.placeholder = `Teks Pilihan ${i}`;
+                label.appendChild(input);
+                pilihanContainer.appendChild(label);
+            }
+
+            // Create a submit button
+            const submitButton = document.createElement("button");
+            submitButton.textContent = "Submit";
+            submitButton.onclick = function () {
+                const selectedPilihan = document.querySelector("input[type='radio']:checked");
+                if (selectedPilihan) {
+                    const teksPilihan = selectedPilihan.value;
+                    console.log(`Hallo, nama saya ${nama}, saya mempunyai sejumlah ${jumlahPilihan} pilihan yaitu ${teksPilihan}.`);
+                } else {
+                    console.log("Anda belum memilih pilihan.");
+                }
+            };
+            pilihanContainer.appendChild(submitButton);
+        }
+    </script>
+</body>
+</html>
+
+
